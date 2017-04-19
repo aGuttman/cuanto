@@ -2,8 +2,7 @@ package edu.colorado.plv.cuanto.jimpleinterpreter
 
 import java.util
 
-import soot.jimple._
-import soot.{Body, Local, Scene, SceneTransformer}
+import soot.{Scene, SceneTransformer}
 
 /**
   * Created by Lumber on 3/19/2017.

@@ -51,7 +51,13 @@ package object jimpleinterpreter {
   // TODO: is there a better way to do this?
   @deprecated()
   private def getNextStmt(stmt: Stmt, body: Body): Stmt = {
-    val it = body.getUnits.iterator()
+    // cannot use foldRight here... (otherwise it would be in the wrong direction of traversal)
+    body.getUnits.iterator().asScala.foldLeft(false) {
+      (acc, nextStmt) => if (acc) return nextStmt.asInstanceOf[Stmt]; nextStmt == stmt
+    }
+    null
+
+    /*val it = body.getUnits.iterator()
     while (it.hasNext) {
       val nextStmt = it.next()
       if (nextStmt == stmt) {
@@ -65,7 +71,7 @@ package object jimpleinterpreter {
         }
       }
     }
-    null
+    null*/
   }
 
   /**
