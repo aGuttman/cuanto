@@ -42,6 +42,7 @@ class ArithmeticInterpreterSpec extends CuantoSpec with ArithmeticInterpreterBeh
 
   behavior of "Denotational.Concrete"
 
-  it should behave like interpreter(e => Try(Denotational.Concrete(e)))
+  // TODO
+  // it should behave like interpreter(e => Try(Denotational.Concrete(e)))
 
 }
