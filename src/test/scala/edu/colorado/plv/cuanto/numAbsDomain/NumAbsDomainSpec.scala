@@ -1,9 +1,7 @@
 package edu.colorado.plv.cuanto.numAbsDomain
 
-import org.scalatest.{FlatSpec, Matchers}
 import apron.{Box, Octagon, Polka}
-
-import scala.sys.process._
+import org.scalatest.{FlatSpec, Matchers}
 
 /**
   * Created by lumber on 4/20/17.
@@ -27,21 +25,23 @@ class NumAbsDomainSpec extends FlatSpec with Matchers {
     * As a result, I set the current working directory to "/Users/lumber/Documents/workspace/cuanto/lib" in "Run -> Edit Configurations..."
     */
 
-  System.out.println("")
-  System.out.println("")
-  System.out.println("Box")
-  System.out.println("=========")
+  println("")
+  println("")
+  println("Box")
+  println("=========")
   Apron.test(new Box)
 
-  System.out.println("")
-  System.out.println("Octagons")
-  System.out.println("=========")
+  println("")
+  println("Octagons")
+  println("=========")
   Apron.test(new Octagon)
 
-  System.out.println("")
-  System.out.println("Polyhedra")
-  System.out.println("=========")
+  println("")
+  println("Polyhedra (strict inequalities)")
+  println("=========")
   Apron.test(new Polka(false))
-  System.out.println("")
+  println("")
+  println("Polyhedra (strict inequalities)")
+  println("=========")
   Apron.test(new Polka(true))
 }

@@ -2,6 +2,7 @@ package edu.colorado.plv.cuanto.numAbsDomain
 
 import java.util
 
+import apron.Abstract0
 import apron._
 import gmp.Mpfr
 
@@ -82,8 +83,6 @@ object Apron {
     println("sat 1:    " + box(0) + " -> " + a0.satisfy(man, 1, box(0)))
     println("uncons 0: " + a0.isDimensionUnconstrained(man, 0))
 
-
-    import apron.Abstract0
     val a1 = new Abstract0(man, a0)
     assert(a0.isEqual(man, a1))
     a1.addRay(man, gen)
