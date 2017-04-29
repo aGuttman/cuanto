@@ -13,6 +13,8 @@ class ApronLinExpr extends AbsExpr {
 
   def expr = Expr
 
+  override def toString: String = Expr.toString
+
   def this(const: Int, terms: Array[ApronLinTerm]) {
     this
     Expr = new Linexpr0(terms.map(t => t.term), new MpqScalar(const))
@@ -20,6 +22,6 @@ class ApronLinExpr extends AbsExpr {
 
   def this(const: Double, terms: Array[ApronLinTerm]) {
     this
-    Expr = new Linexpr0(terms.map(t => t.term), new MpfrScalar(const, Mpfr.RNDU))
+    Expr = new Linexpr0(terms.map(t => t.term), new MpfrScalar(const, ROUNDING))
   }
 }

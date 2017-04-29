@@ -1,19 +1,20 @@
 package edu.colorado.plv.cuanto.numAbsDomain
 
 import apron._
-import gmp.Mpfr
 
 /**
   * Created by lumber on 4/29/17.
   */
 class ApronDom(override val dim: (Int, Int), override val dom: Array[AbsInterval]) extends AbsDom(dim, dom) {
-  val man = new Octagon
-  val a0 = new Abstract0(man, dim._1, dim._2, dom.map(int => int.interval.asInstanceOf[Interval]))
+  private val man = new Octagon
+  private val a0 = new Abstract0(man, dim._1, dim._2, dom.map(int => int.interval.asInstanceOf[Interval]))
+
+  override def toString: String = dom.foldLeft("Domain:\n")((acc, interval) => acc + "  " + interval.toString + "\n")
 
   private def scalarToDouble(scalar: Scalar): Double = {
-    val ret = new MpfrScalar(0.1, Mpfr.RNDU).`val`
-    scalar.toMpfr(ret, Mpfr.RNDU)
-    ret.doubleValue(Mpfr.RNDU)
+    val ret = new MpfrScalar(0.1, ROUNDING).`val`
+    scalar.toMpfr(ret, ROUNDING)
+    ret.doubleValue(ROUNDING)
   }
 
   def getBound(expr: AbsExpr): AbsInterval = {

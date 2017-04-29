@@ -7,4 +7,6 @@ import apron.Interval
   */
 class ApronInterval(lb: Double, ub: Double) extends AbsInterval(lb, ub) {
   def interval = new Interval(lb, ub)
+
+  override def toString: String = interval.toString
 }

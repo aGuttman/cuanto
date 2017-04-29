@@ -1,16 +1,61 @@
 package edu.colorado.plv.cuanto.numAbsDomain
 
-import java.util
-
-import apron.Abstract0
-import apron._
+import apron.{Abstract0, _}
 import gmp.Mpfr
 
 /**
   * Created by lumber on 4/20/17.
   */
-object Apron {
-  def test(man: Manager): Unit = {
+object ApronTest {
+  def runInterfaceTest(): Unit = {
+    val dom = new ApronDom((2, 1), Array(new ApronInterval(1, 2), new ApronInterval(-3, 5), new ApronInterval(0.75, 1.2)))
+    println(dom + "\n\n\n")
+
+    println("Bound of x2: " + dom.getBound(2).interval + "\n")
+
+    val ltrms = Array(new ApronLinTerm(-5, 1), new ApronLinTerm(0.1, 0.6, 0), new ApronLinTerm(0.1, 2))
+    println(ltrms.foldLeft("Linear terms:\n")((acc, t) => acc + "  " + t + "\n"))
+    val linexpr = new ApronLinExpr(2, ltrms)
+    println("Linear expression: " + linexpr + "\n")
+    println("Bound of linear expression: " + dom.getBound(linexpr).interval + "\n")
+    val lincons = new ApronLinCons(linexpr, LE)
+    println("Linear constraint: " + lincons + "\n")
+    println("If the given domain satisfies the linear constraint: " + dom.satisfy(lincons))
+
+    println("\n\n")
+    val txpr = new ApronNonLinTerm(ADD, new ApronNonLinTerm(MUL, 0, 1), new ApronNonLinTerm(DIV, 2, 2.0))
+    println("Nonlinear term: " + txpr + "\n")
+    val texpr = new ApronNonLinExpr(txpr)
+    println("Nonlinear expression: " + texpr + "\n")
+    println("Bound of nonlinear expression:  " + dom.getBound(texpr).interval + "\n")
+    val tcons = new ApronNonLinCons(texpr, LE)
+    println("Linear constraint: " + tcons + "\n")
+    println("If the given domain satisfies the linear constraint: " + dom.satisfy(tcons))
+  }
+
+  def runAPITest(): Unit = {
+    println("")
+    println("")
+    println("Box")
+    println("=========")
+    test(new Box)
+
+    println("")
+    println("Octagons")
+    println("=========")
+    test(new Octagon)
+
+    println("")
+    println("Polyhedra (strict inequalities)")
+    println("=========")
+    test(new Polka(false))
+    println("")
+    println("Polyhedra (strict inequalities)")
+    println("=========")
+    test(new Polka(true))
+  }
+
+  private def test(man: Manager): Unit = {
     /* build some expressions */
 
     /* level 0 */

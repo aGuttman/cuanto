@@ -8,6 +8,8 @@ import apron._
 class ApronLinCons(override val expr: ApronLinExpr, override val op: Uop) extends AbsCons(expr, op) {
   def cons: Lincons0 = Cons
 
+  override def toString: String = expr.toString + " " + op + " 0"
+
   def neg(expr: Linexpr0): Linexpr0 = {
     val ret = new Linexpr0(expr)
     ret.getLinterms.foreach(term => term.coeff.neg())

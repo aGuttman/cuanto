@@ -25,23 +25,5 @@ class NumAbsDomainSpec extends FlatSpec with Matchers {
     * As a result, I set the current working directory to "/Users/lumber/Documents/workspace/cuanto/lib" in "Run -> Edit Configurations..."
     */
 
-  println("")
-  println("")
-  println("Box")
-  println("=========")
-  Apron.test(new Box)
-
-  println("")
-  println("Octagons")
-  println("=========")
-  Apron.test(new Octagon)
-
-  println("")
-  println("Polyhedra (strict inequalities)")
-  println("=========")
-  Apron.test(new Polka(false))
-  println("")
-  println("Polyhedra (strict inequalities)")
-  println("=========")
-  Apron.test(new Polka(true))
+  ApronTest.runInterfaceTest()
 }

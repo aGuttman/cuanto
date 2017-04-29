@@ -10,6 +10,8 @@ class ApronNonLinExpr extends AbsExpr {
 
   def expr = Expr
 
+  override def toString: String = expr.toString
+
   def this(expr: ApronLinExpr) {
     this
     Expr = new Texpr0Intern(expr.expr)

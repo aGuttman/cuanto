@@ -9,6 +9,8 @@ import gmp.Mpq
 class ApronNonLinCons(override val expr: ApronNonLinExpr, override val op: Uop) extends AbsCons(expr, op) {
   def cons: Tcons0 = Cons
 
+  override def toString: String = expr.toString + " " + op + " 0"
+
   private def neg(expr: ApronNonLinExpr): Texpr0Node = new Texpr0BinNode(Texpr0BinNode.OP_SUB, new Texpr0CstNode(new MpqScalar(0)), expr.expr.toTexpr0Node)
 
   private val Cons: Tcons0 = op match {

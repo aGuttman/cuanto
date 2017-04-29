@@ -38,7 +38,4 @@ class AbstractInterpreter {
   }
 
   // Denotational.Abstract(domain)
-
-
-  val dom = new ApronDom((2, 1), Array(new ApronInterval(1, 2), new ApronInterval(-3, 5), new ApronInterval(0.75, 1.2)))
 }

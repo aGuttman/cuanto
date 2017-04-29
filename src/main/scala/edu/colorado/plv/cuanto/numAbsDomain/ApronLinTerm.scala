@@ -11,9 +11,11 @@ class ApronLinTerm extends AbsTerm {
 
   def term: Linterm0 = Term
 
+  override def toString: String = Term.toString
+
   def this(coeff: Double, dim: Int) {
     this
-    Term = new Linterm0(dim, new MpfrScalar(coeff, Mpfr.RNDU))
+    Term = new Linterm0(dim, new MpfrScalar(coeff, ROUNDING))
   }
 
   def this(coeff: Int, dim: Int) {
@@ -21,7 +23,7 @@ class ApronLinTerm extends AbsTerm {
     Term = new Linterm0(dim, new MpqScalar(coeff))
   }
 
-  def this(lb: Int, ub: Int, dim: Int) {
+  def this(lb: Double, ub: Double, dim: Int) {
     this
     Term = new Linterm0(dim, new ApronInterval(lb, ub).interval)
   }
