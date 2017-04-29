@@ -23,6 +23,6 @@ class ApronLinTerm extends AbsTerm {
 
   def this(lb: Int, ub: Int, dim: Int) {
     this
-    Term = new Linterm0(dim, new Interval(lb, ub))
+    Term = new Linterm0(dim, new ApronInterval(lb, ub).interval)
   }
 }
