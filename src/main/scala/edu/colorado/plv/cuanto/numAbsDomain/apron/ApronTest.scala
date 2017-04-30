@@ -1,12 +1,18 @@
-package edu.colorado.plv.cuanto.numAbsDomain
+package edu.colorado.plv.cuanto.numAbsDomain.apron
 
 import apron.{Abstract0, _}
+import edu.colorado.plv.cuanto.jsy.numerical.Denotational
+import edu.colorado.plv.cuanto.numAbsDomain._
 import gmp.Mpfr
 
 /**
   * Created by lumber on 4/20/17.
   */
 object ApronTest {
+  def abstractInterpreter: Unit ={
+    // Denotational.Abstract(new AbstractDomain)
+  }
+
   def runInterfaceTest(): Unit = {
     val dom = new ApronDom((2, 1), Array(new ApronInterval(1, 2), new ApronInterval(-3, 5), new ApronInterval(0.75, 1.2)))
     println(dom + "\n\n\n")
@@ -46,11 +52,11 @@ object ApronTest {
     test(new Octagon)
 
     println("")
-    println("Polyhedra (strict inequalities)")
+    println("Polyhedra (closed convex polyhedra)")
     println("=========")
     test(new Polka(false))
     println("")
-    println("Polyhedra (strict inequalities)")
+    println("Polyhedra (non-closed convex polyhedra)")
     println("=========")
     test(new Polka(true))
   }

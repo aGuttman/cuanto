@@ -1,7 +1,7 @@
-package edu.colorado.plv.cuanto.numAbsDomain
+package edu.colorado.plv.cuanto.numAbsDomain.apron
 
-import apron.{Interval, Linterm0, MpfrScalar, MpqScalar}
-import gmp.Mpfr
+import apron.{Linterm0, MpfrScalar, MpqScalar}
+import edu.colorado.plv.cuanto.numAbsDomain.{AbsTerm, ROUNDING}
 
 /**
   * Created by lumber on 4/27/17.

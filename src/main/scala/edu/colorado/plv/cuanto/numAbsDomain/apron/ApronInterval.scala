@@ -1,6 +1,7 @@
-package edu.colorado.plv.cuanto.numAbsDomain
+package edu.colorado.plv.cuanto.numAbsDomain.apron
 
 import apron.Interval
+import edu.colorado.plv.cuanto.numAbsDomain.AbsInterval
 
 /**
   * Created by lumber on 4/29/17.

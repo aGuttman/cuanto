@@ -1,7 +1,7 @@
-package edu.colorado.plv.cuanto.numAbsDomain
+package edu.colorado.plv.cuanto.numAbsDomain.apron
 
 import apron._
-import gmp.Mpfr
+import edu.colorado.plv.cuanto.numAbsDomain._
 
 /**
   * Created by lumber on 4/27/17.

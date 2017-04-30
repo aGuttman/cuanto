@@ -1,9 +1,7 @@
-package edu.colorado.plv.cuanto.numAbsDomain
+package edu.colorado.plv.cuanto.numAbsDomain.apron
 
 import apron.{Linexpr0, MpfrScalar, MpqScalar}
-import gmp.Mpfr
-
-import collection.JavaConverters._
+import edu.colorado.plv.cuanto.numAbsDomain.{AbsExpr, ROUNDING}
 
 /**
   * Created by lumber on 4/27/17.

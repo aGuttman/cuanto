@@ -1,6 +1,6 @@
 package edu.colorado.plv.cuanto.numAbsDomain
 
-import apron.{Box, Octagon, Polka}
+import edu.colorado.plv.cuanto.numAbsDomain.apron.ApronTest
 import org.scalatest.{FlatSpec, Matchers}
 
 /**

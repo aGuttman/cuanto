@@ -1,12 +1,13 @@
-package edu.colorado.plv.cuanto.numAbsDomain
+package edu.colorado.plv.cuanto.numAbsDomain.apron
 
 import apron._
+import edu.colorado.plv.cuanto.numAbsDomain._
 
 /**
   * Created by lumber on 4/29/17.
   */
 class ApronDom(override val dim: (Int, Int), override val dom: Array[AbsInterval]) extends AbsDom(dim, dom) {
-  private val man = new Octagon
+  private val man = new Polka(true)
   private val a0 = new Abstract0(man, dim._1, dim._2, dom.map(int => int.interval.asInstanceOf[Interval]))
 
   override def toString: String = dom.foldLeft("Domain:\n")((acc, interval) => acc + "  " + interval.toString + "\n")

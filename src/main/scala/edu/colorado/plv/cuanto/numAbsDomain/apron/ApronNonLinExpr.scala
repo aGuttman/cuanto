@@ -1,6 +1,7 @@
-package edu.colorado.plv.cuanto.numAbsDomain
+package edu.colorado.plv.cuanto.numAbsDomain.apron
 
 import apron.Texpr0Intern
+import edu.colorado.plv.cuanto.numAbsDomain.AbsExpr
 
 /**
   * Created by lumber on 4/27/17.

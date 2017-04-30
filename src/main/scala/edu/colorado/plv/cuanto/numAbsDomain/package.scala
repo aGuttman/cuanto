@@ -7,7 +7,7 @@ import gmp.Mpfr
   */
 package object numAbsDomain {
   trait Bop
-  trait Uop
+  trait Cop
 
   case object ADD extends Bop {
     override def toString: String = "+"
@@ -28,22 +28,22 @@ package object numAbsDomain {
     override def toString: String = "^"
   }
 
-  case object LE extends Uop {
+  case object LE extends Cop {
     override def toString: String = "<="
   }
-  case object LT extends Uop {
+  case object LT extends Cop {
     override def toString: String = "<"
   }
-  case object GE extends Uop {
+  case object GE extends Cop {
     override def toString: String = ">="
   }
-  case object GT extends Uop {
+  case object GT extends Cop {
     override def toString: String = ">"
   }
-  case object NE extends Uop {
+  case object NE extends Cop {
     override def toString: String = "!="
   }
-  case object EQ extends Uop {
+  case object EQ extends Cop {
     override def toString: String = "=="
   }
 
