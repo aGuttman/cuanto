@@ -1,6 +1,9 @@
 package edu.colorado.plv.cuanto.scoot.biabduction
 
+import edu.colorado.plv.cuanto.scoot.ir.{Body, Stmt}
 import soot.{SootClass, SootField, SootMethod}
+
+import scala.collection.JavaConverters._
 
 /**
   * Created by Shawn Meier on 4/25/17.
@@ -29,8 +32,26 @@ object SimpleTypestate {
   class ConcretePointsToDomain()
 
   case class AbstractDomain(heapDomain: ConcretePointsToDomain)
-  type MethodIdentifier = SootMethod //TODO: change to something better
-  case class MethodTriple(methodIdentifier: MethodIdentifier, p : AbstractDomain => AbstractDomain)
-  def processMethod(method: MethodIdentifier): MethodTriple = ???
+  type MethodIdentifier = (String,String) //TODO: change to something better
+  case class MethodTriple(methodIdentifier: MethodIdentifier, p : (AbstractDomain, STSSettings, STSContext) => AbstractDomain)
+
+
+  def processMethod(method: SootMethod): MethodTriple = {
+    val body = new Body(method.getActiveBody)
+
+    val initial = (a: AbstractDomain, s: STSSettings, c: STSContext) => a
+    if(body.stmts.length > 0){
+      body.stmts(0)
+      ???
+    }else{
+      MethodTriple((method.getClass.getName, method.getSignature), initial)
+    }
+
+  }
+
+  //The following two classes will eventually
+  case class STSContext() //Calling context plus methods called so far //TODO: how to deal with recursion?
+
+  case class STSSettings() //Policies for choosing when to widen
 
 }
