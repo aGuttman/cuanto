@@ -1,9 +1,7 @@
 class test1{
 	public static void main(String[] args){
 	}
-	public static void foo(){
-		Object o = new Object();
-	}
+
 	public static void bar(){
 		Object o = new Object();
 		o.toString();
