@@ -9,7 +9,12 @@ import scala.collection.JavaConverters._
 class Value(dt: soot.Value) {
   def used: List[Value] = dt.getUseBoxes().asScala.toList.map(a => new Value(a.getValue()))
 
-  def valType: Type = dt.getType()
+  def valType: Type = new Type(dt.getType())
 
   override def toString: String = dt.toString()
+}
+object Value{
+  def unapply(arg: Value): Option[Expr] = {
+    ???
+  }
 }
