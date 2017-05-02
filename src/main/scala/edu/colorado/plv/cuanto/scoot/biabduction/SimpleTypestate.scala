@@ -1,6 +1,7 @@
 package edu.colorado.plv.cuanto.scoot.biabduction
 
-import edu.colorado.plv.cuanto.scoot.ir.{Body, Stmt}
+import edu.colorado.plv.cuanto.jsy.Expr
+import edu.colorado.plv.cuanto.scoot.ir.{AssignStmt, Body, Stmt}
 import soot.{SootClass, SootField, SootMethod}
 
 import scala.collection.JavaConverters._
@@ -23,35 +24,57 @@ object SimpleTypestate {
 
 
   abstract class Value
-  case class Top() extends Value
-  case class SingleObject() extends Value
-  case class Bottom() extends Value
+  case class TopValue() extends Value
+  case class SingleObjectValue() extends Value //TODO: fields
+  case class NullValue()
+  case class BottomValue() extends Value
 
 
 
-  class ConcretePointsToDomain()
 
-  case class AbstractDomain(heapDomain: ConcretePointsToDomain)
-  type MethodIdentifier = (String,String) //TODO: change to something better
-  case class MethodTriple(methodIdentifier: MethodIdentifier, p : (AbstractDomain, STSSettings, STSContext) => AbstractDomain)
+
+  sealed abstract class AbstractDomain
+  case class ConcretePointsToDomain(pts: Map[AbstractAddress, Value]) extends AbstractDomain
+  case class TTop() extends AbstractDomain
+  type MethodIdentifier = (String,String)
+  type MethodAbstractDomainTransformer = Map[AbstractDomain, AbstractDomain]
+
+  //Graph of these represents the transformation applied by a method
+  case class TransformerGraphNode(m: MethodAbstractDomainTransformer, next: Set[TransformerGraphNode])
+
+  //Result of processing a method
+  case class MethodTriple(methodIdentifier: MethodIdentifier, p : MethodAbstractDomainTransformer)
 
 
   def processMethod(method: SootMethod): MethodTriple = {
     val body = new Body(method.getActiveBody)
 
-    val initial = (a: AbstractDomain, s: STSSettings, c: STSContext) => a
     if(body.stmts.length > 0){
-      body.stmts(0)
+      val stmtStart: Set[Stmt] = Set(body.stmts(0))
+      val commandsMap = processCommands(body, Map[Stmt, TransformerGraphNode]())
       ???
     }else{
-      MethodTriple((method.getClass.getName, method.getSignature), initial)
+      //Return Top to Top for empty method, refinement pass later
+      MethodTriple((method.getClass.getName, method.getSignature), Map((TTop(),TTop())))
     }
 
   }
 
-  //The following two classes will eventually
-  case class STSContext() //Calling context plus methods called so far //TODO: how to deal with recursion?
+  //Graph of transforming methods
 
-  case class STSSettings() //Policies for choosing when to widen
+
+  def processCommands(body: Body, upTo: Map[Stmt,
+                        TransformerGraphNode]): Map[Stmt, TransformerGraphNode] = {
+    body.stmts.map(a => a match{
+      case AssignStmt(lhs, rhs) => ???
+//      case
+      case _ => ???
+    })
+    ???
+  }
+  def processExpr(expr: Expr): Map[AbstractDomain, Value] = expr match{
+    case
+    case _ => ???
+  }
 
 }
