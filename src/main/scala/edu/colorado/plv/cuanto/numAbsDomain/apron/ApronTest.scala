@@ -9,12 +9,17 @@ import gmp.Mpfr
   * Created by lumber on 4/20/17.
   */
 object ApronTest {
-  def abstractInterpreter: Unit ={
+  def abstractInterpreter(): Unit ={
     // Denotational.Abstract(new AbstractDomain)
   }
 
+  def constPropagation(): Unit ={
+    val dom1 = new ApronDom((1, 0), Array(new ApronInterval(1, 1)), ApronDom.Box)
+    val dom2 = new ApronDom((1, 0), Array(new ApronInterval(2, 2)), ApronDom.Box)
+  }
+
   def runInterfaceTest(): Unit = {
-    val dom = new ApronDom((2, 1), Array(new ApronInterval(1, 2), new ApronInterval(-3, 5), new ApronInterval(0.75, 1.2)))
+    val dom = new ApronDom((2, 1), Array(new ApronInterval(1, 2), new ApronInterval(-3, 5), new ApronInterval(0.75, 1.2)), ApronDom.Box)
     println(dom + "\n\n\n")
 
     println("Bound of x2: " + dom.getBound(2).interval + "\n")

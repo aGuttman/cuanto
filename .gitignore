@@ -14,5 +14,11 @@ project/plugins/project/
 # IntelliJ
 .idea
 
+<<<<<<< HEAD
 
 sootOutput/
+=======
+# Soot
+sootOutput/
+
+>>>>>>> a29d5a54b1fcb086a226fd4b86d32bc1cadf3ca1
