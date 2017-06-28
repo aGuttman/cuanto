@@ -7,4 +7,5 @@ abstract class AbsDom {
   def getBound(expr: AbsExpr): AbsInterval
   def getBound(dim: Int): AbsInterval
   def satisfy(cons: AbsCons): Boolean
+  def join(absDom: AbsDom): Boolean
 }

@@ -16,7 +16,7 @@ class ApronDom extends AbsDom {
 
   def this(a0p: Abstract0) {
     this
-    new Abstract0(a0.getCreationManager, a0p)
+    a0 = new Abstract0(a0.getCreationManager, a0p)
   }
 
   override def toString: String = dom.foldLeft("Domain:\n")((acc, interval) => acc + "  " + interval.toString + "\n")
