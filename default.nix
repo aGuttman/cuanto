@@ -1,10 +1,8 @@
-{ stdenv, sbt, z3, jdk, japron }:
+with import <nixpkgs> {};
 
-let
+rec {
 
-# If we're using Linux openjdk, there is an option that removes lots
-# of unneeded extra dependencies.
-jdk' =
+minimizeJdk = jdk:
   if stdenv.isLinux
   then jdk.override {minimal = true;}
   else jdk;
@@ -12,7 +10,7 @@ jdk' =
 jarsPath = varName: pkgs: stdenv.mkDerivation {
   name = "jarsPath-${varName}";
   src = ./.;
-  buildInputs = [jdk'] ++ pkgs;
+  buildInputs = [(minimizeJdk jdk)] ++ pkgs;
   propagatedBuildInputs = pkgs;
 
   installPhase = ''
@@ -48,13 +46,26 @@ jarsPath = varName: pkgs: stdenv.mkDerivation {
 # "top level" of `buildInputs`.
 cuantoClasspath = jarsPath "CUANTO_CLASSPATH";
 
-in
+cuantoDepsJapron = cuantoClasspath [japron];
 
-stdenv.mkDerivation rec {
-  name = "cuanto-${version}";
-  version = "dev";
+cuantoDepsAll = stdenv.mkDerivation {
+  name = "cuanto-dependencies-all";
   src = ./.;
-  buildInputs = [
-	sbt z3 (cuantoClasspath [japron])
-  ];
+  propagatedbuildInputs = [ sbt z3 (cuantoClasspath [japron]) ];
+  installPhase = ''
+    mkdir $out
+    echo $CUANTO_CLASSPATH > $out/classpath
+  '';
+};
+
+cuanto = { stdenv, sbt, z3, jdk, japron }:
+  stdenv.mkDerivation rec {
+    name = "cuanto-${version}";
+    version = "dev";
+    src = ./.;
+    buildInputs = [
+      sbt z3 (cuantoClasspath [japron])
+    ];
+  };
+
 }
